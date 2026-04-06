@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/contact")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "https://my-portfolio-yyr1.vercel.app/")
 public class ContactController {
 
     private final ContactService service;
