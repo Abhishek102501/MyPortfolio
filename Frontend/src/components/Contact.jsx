@@ -12,8 +12,8 @@ const links = [
   },
   {
     label: 'LinkedIn',
-    value: 'https://linkedin.com/in/abhishekdubey',
-    href: 'https://linkedin.com/in/abhishekdubey',
+    value: 'https://linkedin.com/in/abhishek-dubey-JD',
+    href: 'https://linkedin.com/in/abhishek-dubey-JD',
     icon: Linkedin,
     color: '#0A66C2',
   },
@@ -201,7 +201,7 @@ export default function Contact() {
                 <AtSign size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-600" />
                 <input
                   type="email"
-                  placeholder="your@email.com"
+                  placeholder="your@gmail.com"
                   required
                   value={form.email}
                   onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
