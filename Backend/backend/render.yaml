@@ -1,1 +1,22 @@
+services:
+  - type: web
+    name: portfolio-backend
+    runtime: java
+    plan: free
+    buildCommand: chmod +x mvnw && ./mvnw clean package
+    startCommand: java -jar target/*.jar
+    envVars:
+      - key: JAVA_VERSION
+        value: 21
 
+      - key: MAIL_USERNAME
+        sync: false
+      - key: MAIL_PASSWORD
+        sync: false
+
+      - key: SPRING_DATASOURCE_URL
+        sync: false
+      - key: SPRING_DATASOURCE_USERNAME
+        sync: false
+      - key: SPRING_DATASOURCE_PASSWORD
+        sync: false
