@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Mail, Linkedin, Github, Send, MessageSquare, User, AtSign } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 const links = [
   {
@@ -32,33 +33,32 @@ export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [sent, setSent] = useState(false);
 
-  const handleSubmit = async (e) => {
+ const handleSubmit = (e) => {
   e.preventDefault();
 
-  try {
-    const response = await fetch("http://localhost:8081/contact", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+  emailjs
+    .send(
+      "service_gpt8926",   // replace
+      "template_r9hcuip",  // replace
+      {
+        user_name: form.name,
+        user_email: form.email,
+        message: form.message,
       },
-      body: JSON.stringify(form),
-    });
-
-    if (!response.ok) {
-      throw new Error("Failed to send");
-    }
-
-    setSent(true);
-    setForm({ name: "", email: "", message: "" });
-
-    setTimeout(() => setSent(false), 4000);
-
-  } catch (error) {
-    console.error(error);
-    alert("Error sending message ❌");
-  }
+      "_HUna7zXUxyKOi5Ve"    // replace
+    )
+    .then(
+      () => {
+        setSent(true);
+        setForm({ name: "", email: "", message: "" });
+        setTimeout(() => setSent(false), 4000);
+      },
+      (error) => {
+        console.error(error);
+        alert("Error sending message ❌");
+      }
+    );
 };
-
   return (
     <section id="contact" className="relative py-24 grid-bg" style={{ paddingLeft: '6rem' }}>
       <div
