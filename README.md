@@ -41,7 +41,7 @@ Features: booking, management, authentication
 📈 Solved 120+ DSA problems
 📰 Editor of College Newspaper
 📬 Contact Me
-📧 Email: your-email@example.com
+📧 Email: your-abhi.shek.897984@gmail.com
 🔗 LinkedIn: https://www.linkedin.com/in/abhishek-dubey-JD
 💻 GitHub: https://github.com/Abhishek102501
 🌟 What Makes Me Unique
