@@ -250,7 +250,7 @@ export default function Hero() {
           </motion.button>
 
           <motion.a
-  href="/resume.pdf"
+  href="/AbhishekResume.pdf"
   download="AbhishekResume.pdf"
   target="_blank"
   rel="noopener noreferrer"
