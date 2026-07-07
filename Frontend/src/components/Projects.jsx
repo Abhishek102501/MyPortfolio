@@ -83,14 +83,17 @@ function TiltCard({ project, inView, index }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={handleMouseLeave}
       className="glass-card relative overflow-hidden flex flex-col"
-      style={{
-        background: project.accent,
-        border: `1px solid ${hovered ? project.border : 'rgba(255,255,255,0.06)'}`,
-        boxShadow: hovered ? `0 20px 60px rgba(0,0,0,0.6), 0 0 30px ${project.color}20` : '0 4px 20px rgba(0,0,0,0.3)',
-        transition: hovered ? 'border-color 0.2s, box-shadow 0.2s' : 'all 0.5s ease',
-         transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
-        transition: hovered ? 'transform 0.1s ease' : 'transform 0.5s ease',
-      }}
+    style={{
+  background: project.accent,
+  border: `1px solid ${hovered ? project.border : 'rgba(255,255,255,0.06)'}`,
+  boxShadow: hovered
+    ? `0 20px 60px rgba(0,0,0,0.6), 0 0 30px ${project.color}20`
+    : '0 4px 20px rgba(0,0,0,0.3)',
+  transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
+  transition: hovered
+    ? 'transform 0.1s ease, border-color 0.2s, box-shadow 0.2s'
+    : 'transform 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease',
+}}
     >
       {/* Top accent bar */}
       <div
