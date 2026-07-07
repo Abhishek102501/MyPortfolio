@@ -6,7 +6,7 @@ const platforms = [
   {
     name: 'LeetCode',
     handle: 'abhishek_dubey',
-    problems: '150+',
+    problems: '200+',
     rating: '1650+',
     rank: 'Top 25%',
     color: '#FFA116',
@@ -42,12 +42,12 @@ const platforms = [
 ];
 
 const dsaTopics = [
-  { topic: 'Arrays & Strings', count: 35, color: '#00f5ff' },
+  { topic: 'Arrays & Strings', count: 80, color: '#00f5ff' },
   { topic: 'Linked Lists', count: 15, color: '#00ff87' },
   { topic: 'Trees & Graphs', count: 25, color: '#bf00ff' },
   { topic: 'Dynamic Programming', count: 20, color: '#ff6b35' },
-  { topic: 'Sorting & Searching', count: 15, color: '#FFA116' },
-  { topic: 'Stacks & Queues', count: 10, color: '#00EA64' },
+  { topic: 'Sorting & Searching', count: 25, color: '#FFA116' },
+  { topic: 'Stacks & Queues', count: 20, color: '#00EA64' },
 ];
 
 export default function DSA() {
