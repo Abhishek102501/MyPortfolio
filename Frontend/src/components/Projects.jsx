@@ -30,7 +30,7 @@ const projects = [
     accent: 'rgba(0,255,135,0.08)',
     border: 'rgba(0,255,135,0.25)',
     github: 'https://github.com/Abhishek102501/Car-Rental-System.git',
-    demo: '#',
+    demo: 'https://car-rental-system-ui.vercel.app/',
     badge: 'BACKEND',
   },
   {
