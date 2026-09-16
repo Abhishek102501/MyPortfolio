@@ -23,8 +23,8 @@ const featured = {
     { label: 'AI Microservice', value: 'Python + FastAPI' },
     { label: 'Data', value: 'PostgreSQL / PostGIS geospatial storage' },
   ],
-  github: null,
-  demo: null,
+  github: 'https://github.com/Abhishek102501/NER-SHIELD',
+  demo: 'https://frontend1-six-xi.vercel.app',
 };
 
 const inquora = {
@@ -46,8 +46,8 @@ const inquora = {
     'Chat with conversation history',
     'JWT per-user access control',
   ],
-  github: null,
-  demo: null,
+  github: 'https://github.com/Abhishek102501/Inquora',
+  demo: 'https://inquora-puce.vercel.app',
 };
 
 function LinkRow({ github, demo, color }) {
