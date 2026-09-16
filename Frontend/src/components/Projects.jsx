@@ -3,7 +3,7 @@ import { motion, useInView } from 'framer-motion';
 import {
   Github, ExternalLink, Mountain, FileSearch, ArrowRight,
   Satellite, Waves, TrendingUp, Upload, Scissors, Sparkles,
-  Database, MessageSquare,
+  Database, MessageSquare, Shirt, Sparkle,
 } from 'lucide-react';
 
 const featured = {
@@ -49,6 +49,29 @@ const inquora = {
   github: 'https://github.com/Abhishek102501/Inquora',
   demo: 'https://inquora-puce.vercel.app',
 };
+
+const otherProjects = [
+  {
+    title: 'BrandVerse',
+    icon: Shirt,
+    color: '#bf00ff',
+    description:
+      'A fashion discovery platform for exploring brands, comparing collections, and tracking trends, with a service-layer architecture that swaps cleanly between mock and live backends.',
+    tech: ['React 19', 'TypeScript', 'Tailwind CSS', 'Spring Boot', 'Spring Security', 'JWT', 'MySQL'],
+    github: 'https://github.com/Abhishek102501/BrandVerse',
+    demo: 'https://brand-verse-ten.vercel.app/',
+  },
+  {
+    title: 'orbit.ai',
+    icon: Sparkle,
+    color: '#00ff87',
+    description:
+      'An AI tool discovery platform for finding, exploring, and comparing AI tools, built as a React port with context-based state management and persisted user preferences.',
+    tech: ['React', 'Vite', 'Context API'],
+    github: 'https://github.com/Abhishek102501/orbit.ai',
+    demo: 'https://orbit-ai-git-main-abhishek102501s-projects.vercel.app/',
+  },
+];
 
 function LinkRow({ github, demo, color }) {
   if (!github && !demo) {
@@ -295,6 +318,56 @@ function InquoraCard({ inView }) {
   );
 }
 
+function OtherProjectCard({ project, inView, index }) {
+  const Icon = project.icon;
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, delay: index * 0.15 + 0.25, ease: [0.16, 1, 0.3, 1] }}
+      whileHover={{ y: -4 }}
+      className="glass-card relative overflow-hidden hover-glow flex flex-col"
+      style={{ border: `1px solid ${project.color}25` }}
+    >
+      <div
+        className="absolute top-0 left-0 w-full h-0.5"
+        style={{ background: `linear-gradient(90deg, ${project.color}, transparent)` }}
+      />
+      <div className="p-6 md:p-7 flex flex-col h-full">
+        <div className="flex items-center gap-3 mb-4">
+          <div
+            className="p-2.5 rounded-xl flex-shrink-0"
+            style={{ background: `${project.color}15`, border: `1px solid ${project.color}40` }}
+          >
+            <Icon size={20} style={{ color: project.color }} />
+          </div>
+          <h3 className="text-lg font-bold text-white" style={{ fontFamily: 'Syne, sans-serif' }}>
+            {project.title}
+          </h3>
+        </div>
+
+        <p className="text-slate-400 text-sm leading-relaxed mb-5 flex-1">
+          {project.description}
+        </p>
+
+        <div className="flex flex-wrap gap-1.5 mb-6">
+          {project.tech.map(t => (
+            <span
+              key={t}
+              className="text-[10px] font-mono px-2 py-0.5 rounded"
+              style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#94a3b8' }}
+            >
+              {t}
+            </span>
+          ))}
+        </div>
+
+        <LinkRow github={project.github} demo={project.demo} color={project.color} />
+      </div>
+    </motion.div>
+  );
+}
+
 export default function Projects() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-100px' });
@@ -323,6 +396,12 @@ export default function Projects() {
 
         <FeaturedProject inView={inView} />
         <InquoraCard inView={inView} />
+
+        <div className="grid md:grid-cols-2 gap-6 mt-6">
+          {otherProjects.map((project, i) => (
+            <OtherProjectCard key={project.title} project={project} inView={inView} index={i} />
+          ))}
+        </div>
       </div>
     </section>
   );
