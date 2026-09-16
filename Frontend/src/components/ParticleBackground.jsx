@@ -4,11 +4,14 @@ export default function ParticleBackground() {
   const canvasRef = useRef(null);
 
   useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
     let animId;
-    let particles = [];
-    let mouse = { x: null, y: null };
+    const particles = [];
+    const mouse = { x: null, y: null };
 
     const resize = () => {
       canvas.width = window.innerWidth;
@@ -17,10 +20,11 @@ export default function ParticleBackground() {
     resize();
     window.addEventListener('resize', resize);
 
-    window.addEventListener('mousemove', (e) => {
+    const handleMouseMove = (e) => {
       mouse.x = e.clientX;
       mouse.y = e.clientY;
-    });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
 
     class Particle {
       constructor() {
@@ -64,7 +68,8 @@ export default function ParticleBackground() {
       }
     }
 
-    for (let i = 0; i < 120; i++) {
+    const particleCount = window.innerWidth < 768 ? 45 : 80;
+    for (let i = 0; i < particleCount; i++) {
       particles.push(new Particle());
     }
 
@@ -98,6 +103,7 @@ export default function ParticleBackground() {
     return () => {
       cancelAnimationFrame(animId);
       window.removeEventListener('resize', resize);
+      window.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
 
@@ -105,6 +111,7 @@ export default function ParticleBackground() {
     <canvas
       ref={canvasRef}
       id="particle-canvas"
+      aria-hidden="true"
       style={{ position: 'fixed', top: 0, left: 0, zIndex: 0, pointerEvents: 'none' }}
     />
   );

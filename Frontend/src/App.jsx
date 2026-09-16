@@ -5,14 +5,15 @@ import ScrollProgress from './components/ScrollProgress';
 import Sidebar from './components/Sidebar';
 import Hero from './components/Hero';
 import About from './components/About';
-import Skills from './components/Skills';
-import Projects from './components/Projects';
-import DSA from './components/DSA';
 import Experience from './components/Experience';
+import Projects from './components/Projects';
+import OpenSource from './components/OpenSource';
+import Skills from './components/Skills';
+import Education from './components/Education';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
-const SECTIONS = ['hero','about','skills','projects','dsa','experience','contact'];
+const SECTIONS = ['hero','about','experience','projects','opensource','skills','education','contact'];
 
 export default function App() {
   const [activeSection, setActiveSection] = useState('hero');
@@ -76,10 +77,11 @@ export default function App() {
         <main className="relative z-10">
           <Hero />
           <About />
-          <Skills />
-          <Projects />
-          <DSA />
           <Experience />
+          <Projects />
+          <OpenSource />
+          <Skills />
+          <Education />
           <Contact />
           <Footer />
         </main>

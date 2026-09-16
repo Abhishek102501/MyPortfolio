@@ -1,219 +1,295 @@
 import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Github, ExternalLink, Shield, Car, Eye, ChevronRight } from 'lucide-react';
+import {
+  Github, ExternalLink, Mountain, FileSearch, ArrowRight,
+  Satellite, Waves, TrendingUp, Upload, Scissors, Sparkles,
+  Database, MessageSquare,
+} from 'lucide-react';
 
-const projects = [
-  {
-    id: 1,
-    title: 'Blockchain-Based Academic Certification System',
-    tagline: 'Tamper-proof credentials on the chain',
-    description:
-      'A decentralised system that issues and verifies academic certificates on a blockchain network. Smart contracts ensure immutability while an admin dashboard lets institutions mint and validate credentials — eliminating fraud.',
-    tech: ['Java', 'Spring Boot', 'Blockchain', 'MySQL', 'REST APIs', 'Smart Contracts'],
-    icon: Shield,
-    color: '#00f5ff',
-    accent: 'rgba(0,245,255,0.08)',
-    border: 'rgba(0,245,255,0.25)',
-    github: 'https://github.com/Abhishek102501/Blockchain_Based_Academic_Certification.git',
-    demo: '#',
-    badge: 'FLAGSHIP',
-  },
-  {
-    id: 2,
-    title: 'Car Rental System',
-    tagline: 'Full-stack rental platform',
-    description:
-      'A complete car rental management platform built with Spring Boot and MySQL. Features include vehicle inventory, booking workflows, payment tracking, and admin analytics — backed by RESTful APIs and JUnit test coverage.',
-    tech: ['Spring Boot', 'MySQL', 'JUnit', 'Mockito', 'REST APIs', 'Hibernate', 'Maven'],
-    icon: Car,
-    color: '#00ff87',
-    accent: 'rgba(0,255,135,0.08)',
-    border: 'rgba(0,255,135,0.25)',
-    github: 'https://github.com/Abhishek102501/Car-Rental-System.git',
-    demo: 'https://car-rental-system-ui.vercel.app/',
-    badge: 'BACKEND',
-  },
-  {
-    id: 3,
-    title: 'Deepfake Detection System',
-    tagline: 'AI-powered media authenticity',
-    description:
-      'A hybrid Java + Python system that analyses video frames for deepfake artefacts using AI/ML models. The Java backend orchestrates video processing pipelines while Python handles inference, serving results via REST endpoints.',
-    tech: ['Java', 'Python', 'AI/ML', 'Spring Boot', 'OpenCV', 'REST APIs', 'MySQL'],
-    icon: Eye,
-    color: '#bf00ff',
-    accent: 'rgba(191,0,255,0.08)',
-    border: 'rgba(191,0,255,0.25)',
-    github: 'https://github.com/Abhishek102501/Deepfake-Detection-System.git',
-    demo: '#',
-    badge: 'AI + JAVA',
-  },
-];
+const featured = {
+  title: 'NER-SHIELD',
+  subtitle: 'AI Landslide Risk Intelligence & Early Warning Platform',
+  description:
+    "An AI-driven landslide risk, early-warning and emergency-response platform for India's North Eastern Region, built for Smart India Hackathon 2026 (SIH26001, Ministry of DoNER).",
+  tech: ['Next.js', 'React', 'TypeScript', 'MapLibre GL', 'Three.js', 'Spring Boot', 'FastAPI', 'PostgreSQL/PostGIS'],
+  pipeline: [
+    { icon: Satellite, label: 'U-Net', sub: 'Satellite image segmentation' },
+    { icon: Waves, label: 'LSTM', sub: 'Rainfall forecasting' },
+    { icon: TrendingUp, label: 'XGBoost', sub: 'Risk scoring' },
+  ],
+  stack: [
+    { label: 'Frontend', value: 'Next.js + MapLibre GL risk maps + Three.js terrain visualization' },
+    { label: 'Backend', value: 'Java 21 + Spring Boot' },
+    { label: 'AI Microservice', value: 'Python + FastAPI' },
+    { label: 'Data', value: 'PostgreSQL / PostGIS geospatial storage' },
+  ],
+  github: null,
+  demo: null,
+};
 
-function TiltCard({ project, inView, index }) {
-  const cardRef = useRef(null);
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
-  const [hovered, setHovered] = useState(false);
-  const Icon = project.icon;
+const inquora = {
+  title: 'Inquora',
+  subtitle: 'Retrieval-Augmented PDF Q&A Application',
+  description:
+    'Full-stack RAG application where users upload a PDF and ask questions, returning grounded answers with page-level citations.',
+  tech: ['Python', 'FastAPI', 'Next.js', 'MongoDB Atlas Vector Search', 'Gemini API'],
+  architecture: [
+    { icon: Upload, label: 'PyMuPDF Extraction' },
+    { icon: Scissors, label: 'Recursive Chunking' },
+    { icon: Sparkles, label: 'Gemini Embeddings' },
+    { icon: Database, label: 'MongoDB Atlas Vector Search' },
+    { icon: MessageSquare, label: 'Gemini Generation' },
+  ],
+  details: [
+    '~10 REST endpoints',
+    'Document upload & management',
+    'Chat with conversation history',
+    'JWT per-user access control',
+  ],
+  github: null,
+  demo: null,
+};
 
-  const handleMouseMove = (e) => {
-    const rect = cardRef.current.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    const rx = ((e.clientY - cy) / (rect.height / 2)) * -8;
-    const ry = ((e.clientX - cx) / (rect.width / 2)) * 8;
-    setTilt({ x: rx, y: ry });
-  };
+function LinkRow({ github, demo, color }) {
+  if (!github && !demo) {
+    return (
+      <p className="text-[11px] font-mono text-slate-600 italic">
+        Source private — hackathon / academic project
+      </p>
+    );
+  }
+  return (
+    <div className="flex gap-3">
+      {github && (
+        <a
+          href={github}
+          target="_blank"
+          rel="noreferrer"
+          className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-white"
+          style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)' }}
+        >
+          <Github size={13} />
+          GitHub
+        </a>
+      )}
+      {demo && (
+        <a
+          href={demo}
+          target="_blank"
+          rel="noreferrer"
+          className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-mono flex-1 justify-center transition-all"
+          style={{ background: `${color}20`, border: `1px solid ${color}50`, color }}
+        >
+          <ExternalLink size={13} />
+          Live Demo
+          <ArrowRight size={12} />
+        </a>
+      )}
+    </div>
+  );
+}
 
-  const handleMouseLeave = () => {
-    setTilt({ x: 0, y: 0 });
-    setHovered(false);
-  };
-
+function FeaturedProject({ inView }) {
   return (
     <motion.div
-      ref={cardRef}
       initial={{ opacity: 0, y: 50 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ delay: index * 0.2, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-      // style={{
-      //  
-      // }}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={handleMouseLeave}
-      className="glass-card relative overflow-hidden flex flex-col"
-    style={{
-  background: project.accent,
-  border: `1px solid ${hovered ? project.border : 'rgba(255,255,255,0.06)'}`,
-  boxShadow: hovered
-    ? `0 20px 60px rgba(0,0,0,0.6), 0 0 30px ${project.color}20`
-    : '0 4px 20px rgba(0,0,0,0.3)',
-  transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
-  transition: hovered
-    ? 'transform 0.1s ease, border-color 0.2s, box-shadow 0.2s'
-    : 'transform 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease',
-}}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className="relative overflow-hidden rounded-2xl mb-10"
+      style={{
+        border: '1px solid rgba(0,245,255,0.25)',
+        background: 'linear-gradient(160deg, rgba(0,245,255,0.06), rgba(6,18,30,0.6))',
+      }}
     >
-      {/* Top accent bar */}
+      {/* Terrain-inspired backdrop */}
       <div
-        className="absolute top-0 left-0 w-full h-0.5"
-        style={{ background: `linear-gradient(90deg, ${project.color}, transparent)` }}
-      />
-
-      {/* Corner glow */}
-      <div
-        className="absolute top-0 right-0 w-40 h-40 pointer-events-none"
+        className="absolute inset-0 pointer-events-none opacity-70"
         style={{
-          background: `radial-gradient(circle at top right, ${project.color}20, transparent 60%)`,
-          opacity: hovered ? 1 : 0.5,
-          transition: 'opacity 0.3s',
+          backgroundImage:
+            'linear-gradient(rgba(0,245,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,245,255,0.05) 1px, transparent 1px)',
+          backgroundSize: '40px 40px',
+          maskImage: 'linear-gradient(to bottom, black, transparent 90%)',
+        }}
+      />
+      <div
+        className="absolute -top-24 -right-24 w-96 h-96 rounded-full pointer-events-none"
+        style={{ background: 'radial-gradient(circle, rgba(0,245,255,0.15), transparent 65%)' }}
+      />
+      <div
+        className="absolute bottom-0 left-0 w-full h-32 pointer-events-none"
+        style={{
+          background: 'linear-gradient(to top, rgba(0,255,135,0.08), transparent)',
+          clipPath: 'polygon(0 100%, 0 60%, 15% 40%, 30% 65%, 45% 30%, 60% 55%, 75% 20%, 90% 50%, 100% 35%, 100% 100%)',
         }}
       />
 
-      <div className="p-7 flex flex-col h-full">
-        {/* Header */}
-        <div className="flex items-start justify-between mb-5">
-          <div
-            className="p-3 rounded-xl"
-            style={{
-              background: `${project.color}15`,
-              border: `1px solid ${project.color}40`,
-            }}
-          >
-            <Icon size={22} style={{ color: project.color }} />
-          </div>
+      <div className="relative p-8 md:p-12">
+        <div className="flex flex-wrap items-center gap-3 mb-5">
           <span
-            className="text-[9px] font-mono tracking-[0.2em] px-3 py-1 rounded-full"
-            style={{
-              background: `${project.color}15`,
-              border: `1px solid ${project.color}30`,
-              color: project.color,
-            }}
+            className="text-[10px] font-mono tracking-[0.25em] px-3 py-1.5 rounded-full"
+            style={{ background: 'rgba(0,245,255,0.15)', border: '1px solid rgba(0,245,255,0.4)', color: '#00f5ff' }}
           >
-            {project.badge}
+            FEATURED PROJECT
+          </span>
+          <span className="text-[10px] font-mono tracking-[0.2em] text-slate-500">
+            SIH26001 · MINISTRY OF DoNER
           </span>
         </div>
 
-        {/* Title */}
-        <h3
-          className="text-lg font-bold leading-tight mb-1"
-          style={{ fontFamily: 'Syne, sans-serif', color: '#e2e8f0' }}
-        >
-          {project.title}
-        </h3>
-        <p className="text-xs font-mono mb-4" style={{ color: project.color }}>
-          {project.tagline}
+        <div className="flex items-start gap-4 mb-4">
+          <div
+            className="p-3.5 rounded-xl flex-shrink-0"
+            style={{ background: 'rgba(0,245,255,0.12)', border: '1px solid rgba(0,245,255,0.35)' }}
+          >
+            <Mountain size={26} style={{ color: '#00f5ff' }} />
+          </div>
+          <div>
+            <h3
+              className="text-2xl md:text-3xl font-black text-white"
+              style={{ fontFamily: 'Orbitron, monospace' }}
+            >
+              {featured.title}
+            </h3>
+            <p className="text-sm md:text-base font-mono mt-1" style={{ color: '#00f5ff' }}>
+              {featured.subtitle}
+            </p>
+          </div>
+        </div>
+
+        <p className="text-slate-300 leading-relaxed max-w-3xl mb-8">
+          {featured.description}
         </p>
 
-        {/* Description */}
-        <p className="text-slate-400 text-sm leading-relaxed mb-6 flex-1">
-          {project.description}
-        </p>
+        {/* ML pipeline */}
+        <div className="grid sm:grid-cols-3 gap-4 mb-8">
+          {featured.pipeline.map(({ icon: Icon, label, sub }, i) => (
+            <div key={label} className="flex items-center gap-3">
+              <div
+                className="flex items-center gap-3 p-4 rounded-xl glass-card flex-1"
+                style={{ border: '1px solid rgba(0,245,255,0.2)' }}
+              >
+                <Icon size={18} style={{ color: '#00ff87' }} className="flex-shrink-0" />
+                <div>
+                  <p className="text-sm font-semibold text-white font-mono">{label}</p>
+                  <p className="text-[11px] text-slate-500">{sub}</p>
+                </div>
+              </div>
+              {i < featured.pipeline.length - 1 && (
+                <ArrowRight size={16} className="hidden sm:block text-slate-700 flex-shrink-0" />
+              )}
+            </div>
+          ))}
+        </div>
 
-        {/* Tech stack */}
-        <div className="flex flex-wrap gap-1.5 mb-6">
-          {project.tech.map(t => (
+        {/* Stack breakdown */}
+        <div className="grid sm:grid-cols-2 gap-3 mb-8">
+          {featured.stack.map(({ label, value }) => (
+            <div key={label} className="p-4 rounded-xl" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
+              <p className="text-[10px] font-mono tracking-widest uppercase mb-1" style={{ color: '#00f5ff' }}>{label}</p>
+              <p className="text-slate-300 text-sm">{value}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Tech badges */}
+        <div className="flex flex-wrap gap-2 mb-8">
+          {featured.tech.map(t => (
             <span
               key={t}
-              className="text-[10px] font-mono px-2 py-0.5 rounded"
-              style={{
-                background: 'rgba(255,255,255,0.05)',
-                border: '1px solid rgba(255,255,255,0.1)',
-                color: '#94a3b8',
-              }}
+              className="text-[11px] font-mono px-3 py-1 rounded-full"
+              style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', color: '#94a3b8' }}
             >
               {t}
             </span>
           ))}
         </div>
 
-        {/* Links */}
-        <div className="flex gap-3">
-          <a
-            href={project.github}
-            target="_blank"
-            rel="noreferrer"
-            className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-mono transition-all"
-            style={{
-              background: 'rgba(255,255,255,0.06)',
-              border: '1px solid rgba(255,255,255,0.12)',
-              color: '#94a3b8',
-            }}
-            onMouseEnter={e => {
-              e.currentTarget.style.color = project.color;
-              e.currentTarget.style.borderColor = project.color + '50';
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.color = '#94a3b8';
-              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)';
-            }}
-          >
-            <Github size={13} />
-            GitHub
-          </a>
-          <a
-            href={project.demo}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-mono flex-1 justify-center transition-all"
-            style={{
-              background: `${project.color}20`,
-              border: `1px solid ${project.color}50`,
-              color: project.color,
-            }}
-            onMouseEnter={e => {
-              e.currentTarget.style.background = project.color + '30';
-              e.currentTarget.style.boxShadow = `0 0 15px ${project.color}30`;
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.background = project.color + '20';
-              e.currentTarget.style.boxShadow = 'none';
-            }}
-          >
-            <ExternalLink size={13} />
-            Live Demo
-            <ChevronRight size={12} />
-          </a>
+        <LinkRow github={featured.github} demo={featured.demo} color="#00f5ff" />
+      </div>
+    </motion.div>
+  );
+}
+
+function InquoraCard({ inView }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+      className="glass-card relative overflow-hidden hover-glow"
+      style={{ border: '1px solid rgba(0,255,135,0.2)' }}
+    >
+      <div
+        className="absolute top-0 left-0 w-full h-0.5"
+        style={{ background: 'linear-gradient(90deg, #00ff87, transparent)' }}
+      />
+      <div className="p-7 md:p-8">
+        <div className="flex items-start justify-between mb-5">
+          <div className="flex items-start gap-4">
+            <div
+              className="p-3 rounded-xl flex-shrink-0"
+              style={{ background: 'rgba(0,255,135,0.12)', border: '1px solid rgba(0,255,135,0.35)' }}
+            >
+              <FileSearch size={22} style={{ color: '#00ff87' }} />
+            </div>
+            <div>
+              <h3 className="text-xl font-bold text-white" style={{ fontFamily: 'Syne, sans-serif' }}>
+                {inquora.title}
+              </h3>
+              <p className="text-xs font-mono mt-1" style={{ color: '#00ff87' }}>{inquora.subtitle}</p>
+            </div>
+          </div>
         </div>
+
+        <p className="text-slate-400 text-sm leading-relaxed mb-6 max-w-2xl">
+          {inquora.description}
+        </p>
+
+        {/* Architecture flow */}
+        <div className="mb-6">
+          <p className="text-[10px] font-mono text-slate-600 tracking-widest uppercase mb-3">Architecture</p>
+          <div className="flex flex-wrap items-center gap-2">
+            {inquora.architecture.map(({ icon: Icon, label }, i) => (
+              <div key={label} className="flex items-center gap-2">
+                <div
+                  className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-mono text-slate-300"
+                  style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)' }}
+                >
+                  <Icon size={13} style={{ color: '#00ff87' }} />
+                  {label}
+                </div>
+                {i < inquora.architecture.length - 1 && (
+                  <ArrowRight size={12} className="text-slate-700 flex-shrink-0" />
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Details */}
+        <div className="grid grid-cols-2 gap-2 mb-6">
+          {inquora.details.map(d => (
+            <span key={d} className="text-slate-500 text-xs font-mono flex items-center gap-2">
+              <ArrowRight size={10} style={{ color: '#00ff87', flexShrink: 0 }} />
+              {d}
+            </span>
+          ))}
+        </div>
+
+        {/* Tech */}
+        <div className="flex flex-wrap gap-1.5 mb-6">
+          {inquora.tech.map(t => (
+            <span
+              key={t}
+              className="text-[10px] font-mono px-2 py-0.5 rounded"
+              style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#94a3b8' }}
+            >
+              {t}
+            </span>
+          ))}
+        </div>
+
+        <LinkRow github={inquora.github} demo={inquora.demo} color="#00ff87" />
       </div>
     </motion.div>
   );
@@ -224,7 +300,7 @@ export default function Projects() {
   const inView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="projects" className="relative py-24 grid-bg" style={{ paddingLeft: '6rem' }}>
+    <section id="projects" className="relative py-24 grid-bg pl-6 sm:pl-10 md:pl-24">
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -237,22 +313,16 @@ export default function Projects() {
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
-          className="mb-16"
+          className="mb-12"
         >
           <p className="text-xs font-mono text-cyan-400/60 tracking-[0.3em] uppercase mb-2">03 / Projects</p>
           <h2 className="section-heading text-3xl md:text-4xl text-white">
             Things I've Built<span style={{ color: '#00f5ff' }}>.</span>
           </h2>
-          <p className="text-slate-500 mt-4 text-sm font-mono">
-            // Hover over cards for 3D tilt effect
-          </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {projects.map((project, i) => (
-            <TiltCard key={project.id} project={project} inView={inView} index={i} />
-          ))}
-        </div>
+        <FeaturedProject inView={inView} />
+        <InquoraCard inView={inView} />
       </div>
     </section>
   );

@@ -6,11 +6,10 @@ export default function Footer() {
 
   return (
     <footer
-      className="relative py-10 border-t"
+      className="relative py-10 border-t pl-6 sm:pl-10 md:pl-20"
       style={{
         borderColor: 'rgba(0,245,255,0.08)',
         background: 'rgba(2,4,8,0.9)',
-        paddingLeft: '5rem',
       }}
     >
       <div className="max-w-6xl mx-auto px-6 md:px-12">
@@ -33,7 +32,7 @@ export default function Footer() {
               >
                 ABHISHEK DUBEY
               </p>
-              <p className="text-slate-600 text-[10px] font-mono">Java Developer • MCA 2025</p>
+              <p className="text-slate-600 text-[10px] font-mono">Java Backend Developer · Full-Stack &amp; Applied AI</p>
             </div>
           </div>
 
@@ -41,9 +40,8 @@ export default function Footer() {
           <div className="flex items-center gap-4">
             {[
               { href: 'https://github.com/Abhishek102501', icon: Github, label: 'GitHub' },
-              { href: 'https://linkedin.com/in/abhishek-dubey-JD', icon: Linkedin, label: 'LinkedIn' },
+              { href: 'https://linkedin.com/in/abhishek-dubey', icon: Linkedin, label: 'LinkedIn' },
               { href: 'mailto:abhi.shek.897984@gmail.com', icon: Mail, label: 'Email' },
-              
             ].map(({ href, icon: Icon, label }) => (
               <motion.a
                 key={label}

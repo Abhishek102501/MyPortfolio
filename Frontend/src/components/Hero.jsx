@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Download, ChevronDown, Cpu, Globe, Database } from 'lucide-react';
+import { ArrowRight, Download, ChevronDown, Cpu, MapPin as MapPinIcon, Database, Github, Linkedin, Mail } from 'lucide-react';
 
 const roles = [
-  'Java Developer',
-  'Backend Engineer',
-  'DSA Problem Solver',
-  'Spring Boot Expert',
-  'MCA First Year',
+  'Java Backend Developer',
+  'Full-Stack Developer',
+  'Applied AI Engineer',
+  'Spring Boot Developer',
+  'MCA Student',
 ];
 
 export default function Hero() {
@@ -47,15 +47,14 @@ export default function Hero() {
 
   const floatIcons = [
     { icon: Cpu, label: 'Java', delay: 0, pos: { top: '20%', right: '12%' } },
-    { icon: Globe, label: 'Spring', delay: 1.5, pos: { top: '60%', right: '8%' } },
-    { icon: Database, label: 'MySQL', delay: 3, pos: { top: '40%', right: '25%' } },
+    { icon: Database, label: 'PostGIS', delay: 1.5, pos: { top: '60%', right: '8%' } },
+    { icon: MapPinIcon, label: 'Geospatial', delay: 3, pos: { top: '40%', right: '25%' } },
   ];
 
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center grid-bg overflow-hidden"
-      style={{ paddingLeft: '5rem' }}
+      className="relative min-h-screen flex items-center grid-bg overflow-hidden pl-6 sm:pl-10 md:pl-20"
     >
       {/* Radial glow backdrop */}
       <div
@@ -136,7 +135,7 @@ export default function Hero() {
         </motion.div>
       ))}
 
-      <div className="relative z-10 max-w-3xl px-8 md:px-12">
+      <div className="relative z-10 max-w-3xl px-6 sm:px-8 md:px-12 w-full">
         {/* Status badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -170,7 +169,7 @@ export default function Hero() {
             {'<'} Hello, World {'/>'}
           </p>
           <h1
-            className="text-5xl md:text-7xl font-black leading-none mb-2"
+            className="text-4xl sm:text-5xl md:text-7xl font-black leading-none mb-3"
             style={{ fontFamily: 'Orbitron, monospace' }}
           >
             <span className="block text-white">ABHISHEK</span>
@@ -187,6 +186,13 @@ export default function Hero() {
               DUBEY
             </span>
           </h1>
+          <p
+            className="text-base md:text-lg font-semibold text-slate-200 mt-3"
+            style={{ fontFamily: 'Syne, sans-serif' }}
+          >
+            Java Backend Developer <span className="text-slate-600 mx-1">·</span>{' '}
+            <span style={{ color: '#00ff87' }}>Full-Stack &amp; Applied AI</span>
+          </p>
         </motion.div>
 
         {/* Typing animation */}
@@ -211,14 +217,24 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1 }}
-          className="text-slate-400 text-base md:text-lg leading-relaxed max-w-xl mb-8"
+          className="text-slate-400 text-base md:text-lg leading-relaxed max-w-xl mb-4"
           style={{ fontFamily: 'Syne, sans-serif' }}
         >
-          Building{' '}
-          <span className="text-cyan-400 font-semibold">scalable backend systems</span>{' '}
-          with Java & Spring Boot. MCA final-year student passionate about{' '}
-          <span className="text-emerald-400 font-semibold">clean architecture</span>{' '}
-          and solving complex algorithmic challenges.
+          MCA student and backend-focused developer building{' '}
+          <span className="text-cyan-400 font-semibold">production-shaped systems</span>{' '}
+          in Java and Spring Boot, with hands-on work in{' '}
+          <span className="text-emerald-400 font-semibold">retrieval-augmented AI</span> and{' '}
+          <span className="text-emerald-400 font-semibold">geospatial platforms</span>.
+        </motion.p>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.05 }}
+          className="flex items-center gap-2 text-slate-500 text-xs font-mono mb-8"
+        >
+          <MapPinIcon size={12} />
+          Ghaziabad, India <span className="mx-1 text-slate-700">•</span> AWS Certified Cloud Practitioner
         </motion.p>
 
         {/* CTA Buttons */}
@@ -239,29 +255,45 @@ export default function Hero() {
             <ArrowRight size={14} />
           </motion.button>
 
-          <motion.button
+          <motion.a
+            href="/AbhishekResume.pdf"
+            download="AbhishekDubey_Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-            onClick={() => scrollTo('contact')}
-            className="btn-neon rounded-lg font-display flex items-center gap-2"
-            style={{ fontFamily: 'Orbitron, monospace', fontSize: '0.7rem', letterSpacing: '0.12em' }}
+            className="flex items-center gap-2 px-6 py-3 rounded-lg text-slate-300 text-xs font-mono tracking-widest hover:text-white transition-colors"
+            style={{ border: '1px solid rgba(255,255,255,0.15)' }}
           >
-            CONTACT ME
-          </motion.button>
-
-          <motion.a
-  href="/AbhishekResume.pdf"
-  download="AbhishekResume.pdf"
-  target="_blank"
-  rel="noopener noreferrer"
-  whileHover={{ scale: 1.05 }}
-  whileTap={{ scale: 0.97 }}
-  className="flex items-center gap-2 px-6 py-3 rounded-lg text-slate-400 text-xs font-mono tracking-widest hover:text-white transition-colors"
-  style={{ border: '1px solid rgba(255,255,255,0.1)' }}
->
             <Download size={14} />
-            RESUME
+            DOWNLOAD RESUME
           </motion.a>
+        </motion.div>
+
+        {/* Social links */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.4 }}
+          className="flex items-center gap-3 mt-6"
+        >
+          {[
+            { href: 'https://github.com/Abhishek102501', icon: Github, label: 'GitHub' },
+            { href: 'https://linkedin.com/in/abhishek-dubey', icon: Linkedin, label: 'LinkedIn' },
+            { href: 'mailto:abhi.shek.897984@gmail.com', icon: Mail, label: 'Email' },
+          ].map(({ href, icon: Icon, label }) => (
+            <a
+              key={label}
+              href={href}
+              target={href.startsWith('mailto') ? undefined : '_blank'}
+              rel={href.startsWith('mailto') ? undefined : 'noreferrer'}
+              aria-label={label}
+              className="p-2.5 rounded-lg text-slate-500 hover:text-cyan-400 transition-colors"
+              style={{ border: '1px solid rgba(255,255,255,0.08)', background: 'rgba(255,255,255,0.02)' }}
+            >
+              <Icon size={16} />
+            </a>
+          ))}
         </motion.div>
 
         {/* Tech stack chips */}
@@ -269,9 +301,9 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5 }}
-          className="flex flex-wrap gap-2 mt-10"
+          className="flex flex-wrap gap-2 mt-8"
         >
-          {['Java', 'Spring Boot', 'MySQL', 'REST APIs', 'DSA', 'JUnit'].map((tech, i) => (
+          {['Java', 'Spring Boot', 'FastAPI', 'React', 'PostgreSQL/PostGIS', 'RAG'].map((tech, i) => (
             <motion.span
               key={tech}
               initial={{ opacity: 0, scale: 0.8 }}
@@ -294,6 +326,7 @@ export default function Hero() {
         onClick={() => scrollTo('about')}
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
+        aria-label="Scroll to About section"
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-slate-600 hover:text-cyan-400 transition-colors"
       >
         <span className="text-[10px] font-mono tracking-widest">SCROLL</span>

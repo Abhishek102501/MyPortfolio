@@ -1,17 +1,18 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Home, User, Zap, FolderOpen, Code2, Briefcase, Mail, Menu, X, Terminal
+  Home, User, Zap, FolderOpen, GitBranch, Briefcase, GraduationCap, Mail, Menu, X, Terminal
 } from 'lucide-react';
 
 const navItems = [
-  { id: 'hero',       label: 'Home',       icon: Home },
-  { id: 'about',      label: 'About',      icon: User },
-  { id: 'skills',     label: 'Skills',     icon: Zap },
-  { id: 'projects',   label: 'Projects',   icon: FolderOpen },
-  { id: 'dsa',        label: 'DSA',        icon: Code2 },
-  { id: 'experience', label: 'Experience', icon: Briefcase },
-  { id: 'contact',    label: 'Contact',    icon: Mail },
+  { id: 'hero',       label: 'Home',        icon: Home },
+  { id: 'about',      label: 'About',       icon: User },
+  { id: 'experience', label: 'Experience',  icon: Briefcase },
+  { id: 'projects',   label: 'Projects',    icon: FolderOpen },
+  { id: 'opensource', label: 'Open Source', icon: GitBranch },
+  { id: 'skills',     label: 'Skills',      icon: Zap },
+  { id: 'education',  label: 'Education',   icon: GraduationCap },
+  { id: 'contact',    label: 'Contact',     icon: Mail },
 ];
 
 export default function Sidebar({ active }) {
@@ -28,6 +29,8 @@ export default function Sidebar({ active }) {
       {/* Mobile toggle */}
       <button
         onClick={() => setOpen(!open)}
+        aria-label={open ? 'Close navigation menu' : 'Open navigation menu'}
+        aria-expanded={open}
         className="fixed top-4 left-4 z-50 md:hidden glass-card p-2 rounded-lg neon-border"
       >
         {open ? <X size={20} className="text-cyan-400" /> : <Menu size={20} className="text-cyan-400" />}
@@ -93,6 +96,8 @@ export default function Sidebar({ active }) {
                   onClick={() => scrollTo(id)}
                   onHoverStart={() => setHovered(id)}
                   onHoverEnd={() => setHovered(null)}
+                  aria-label={label}
+                  aria-current={isActive ? 'true' : undefined}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   className={`

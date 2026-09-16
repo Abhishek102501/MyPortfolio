@@ -1,20 +1,20 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { GraduationCap, Target, Coffee, Dumbbell, Newspaper } from 'lucide-react';
+import { GraduationCap, Target, ShieldCheck, GitPullRequest, Newspaper } from 'lucide-react';
 
-const stats = [
-  { label: 'LeetCode', value: '120+', sub: 'Problems' },
-  { label: 'Projects', value: '5+', sub: 'Built' },
-  { label: 'Experience', value: '1+', sub: 'Years Dev' },
-  { label: 'GPA', value: '7.5+', sub: 'CGPA' },
+const facts = [
+  { label: 'Focus', value: 'Java · Spring Boot', sub: 'Backend Engineering' },
+  { label: 'Applied AI', value: 'RAG · Geospatial', sub: 'Hands-on Projects' },
+  { label: 'Certified', value: 'AWS CCP', sub: 'Cloud Practitioner' },
+  { label: 'Studying', value: 'MCA', sub: 'KIET, 2025–2027' },
 ];
 
 const highlights = [
-  { icon: GraduationCap, text: 'MCA First Year — KIET Deemed to be University', color: '#00f5ff' },
+  { icon: GraduationCap, text: 'MCA Student — KIET Group of Institutions', color: '#00f5ff' },
   { icon: Target, text: 'Backend Focus: Java, Spring Boot, REST APIs', color: '#00ff87' },
-  { icon: Newspaper, text: 'Editor — College Newspaper', color: '#bf00ff' },
-  { icon: Dumbbell, text: 'Fitness Enthusiast & Initiative Day Winner', color: '#ff6b35' },
+  { icon: GitPullRequest, text: 'Open Source Contributor — GSSoC 2026', color: '#bf00ff' },
+  { icon: ShieldCheck, text: 'AWS Certified Cloud Practitioner', color: '#ff6b35' },
 ];
 
 const fadeUp = {
@@ -31,7 +31,7 @@ export default function About() {
   const inView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="about" className="relative py-24 grid-bg" style={{ paddingLeft: '6rem' }}>
+    <section id="about" className="relative py-24 grid-bg pl-6 sm:pl-10 md:pl-24">
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -69,17 +69,18 @@ export default function About() {
                 style={{ background: 'linear-gradient(90deg, #00f5ff, transparent)' }}
               />
               <p className="text-slate-300 leading-relaxed text-lg" style={{ fontFamily: 'Syne, sans-serif' }}>
-                I'm{' '}
-                <span className="text-cyan-400 font-semibold">Abhishek Dubey</span>, a first-year MCA student
-                with a deep passion for building robust, scalable backend systems. I specialise in{' '}
-                <span className="text-emerald-400 font-semibold">Java & Spring Boot</span>, crafting
-                REST APIs and microservices that power real-world applications.
+                I'm <span className="text-cyan-400 font-semibold">Abhishek Dubey</span>, an MCA
+                student and backend-focused developer building{' '}
+                <span className="text-emerald-400 font-semibold">production-shaped systems</span>{' '}
+                in Java and Spring Boot.
               </p>
               <p className="text-slate-400 leading-relaxed mt-4">
-                My journey started with curiosity about how large-scale systems work — and led me down
-                a path of mastering data structures, backend architecture, and test-driven development.
-                I write clean, well-tested code and love turning complex business requirements into
-                elegant technical solutions.
+                Alongside core backend work, I have hands-on experience building{' '}
+                <span className="text-slate-200 font-medium">retrieval-augmented AI</span> applications
+                and <span className="text-slate-200 font-medium">geospatial platforms</span> — combining
+                clean API design with practical machine learning integrations. I'm an{' '}
+                <span className="text-slate-200 font-medium">AWS Certified Cloud Practitioner</span>{' '}
+                and an active open-source contributor.
               </p>
             </motion.div>
 
@@ -111,9 +112,9 @@ export default function About() {
                     CAREER GOAL
                   </h3>
                   <p className="text-slate-400 text-sm leading-relaxed">
-                    To land a backend engineering role at a product-based company where I can architect
-                    high-performance systems at scale, contribute to open-source projects, and grow
-                    towards a senior engineering position.
+                    To grow as a backend engineer building reliable, well-tested systems — and to keep
+                    combining that backend depth with applied AI and geospatial engineering on
+                    real, production-shaped problems.
                   </p>
                 </div>
               </div>
@@ -140,9 +141,9 @@ export default function About() {
             </motion.div>
           </div>
 
-          {/* Right — Stats */}
+          {/* Right — Facts */}
           <div className="lg:col-span-2 space-y-4">
-            {stats.map(({ label, value, sub }, i) => (
+            {facts.map(({ label, value, sub }, i) => (
               <motion.div
                 key={label}
                 custom={i + 2}
@@ -154,7 +155,7 @@ export default function About() {
               >
                 <div>
                   <p
-                    className="text-3xl font-black"
+                    className="text-xl font-black"
                     style={{
                       fontFamily: 'Orbitron, monospace',
                       background: 'linear-gradient(135deg, #00f5ff, #00ff87)',
@@ -176,13 +177,13 @@ export default function About() {
               </motion.div>
             ))}
 
-            {/* Fun fact */}
+            {/* Editorial note */}
             <motion.div
               custom={6}
               variants={fadeUp}
               initial="hidden"
               animate={inView ? 'visible' : 'hidden'}
-              className="glass-card p-6"
+              className="glass-card p-6 relative overflow-hidden"
               style={{ border: '1px solid rgba(191,0,255,0.2)' }}
             >
               <div
@@ -190,11 +191,12 @@ export default function About() {
                 style={{ background: 'linear-gradient(90deg, #bf00ff, transparent)' }}
               />
               <div className="flex items-center gap-2 mb-2">
-                <Coffee size={14} style={{ color: '#bf00ff' }} />
-                <span className="text-xs font-mono text-purple-400/70 tracking-widest">FUN FACT</span>
+                <Newspaper size={14} style={{ color: '#bf00ff' }} />
+                <span className="text-xs font-mono text-purple-400/70 tracking-widest">BEYOND CODE</span>
               </div>
               <p className="text-slate-400 text-sm">
-                When not coding, I'm lifting weights 🏋️ or crafting stories for the college newspaper ✍️
+                I also serve as Editor of my college newsletter, leading editorial content and
+                coordinating a small team of writers.
               </p>
             </motion.div>
           </div>

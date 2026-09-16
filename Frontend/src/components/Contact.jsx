@@ -13,8 +13,8 @@ const links = [
   },
   {
     label: 'LinkedIn',
-    value: 'https://linkedin.com/in/abhishek-dubey-JD',
-    href: 'https://linkedin.com/in/abhishek-dubey-JD',
+    value: 'https://linkedin.com/in/abhishek-dubey',
+    href: 'https://linkedin.com/in/abhishek-dubey',
     icon: Linkedin,
     color: '#0A66C2',
   },
@@ -33,41 +33,34 @@ export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [sent, setSent] = useState(false);
 
+const [sendError, setSendError] = useState('');
+
 const handleSubmit = async (e) => {
   e.preventDefault();
-
-  console.log("Submit clicked");
-  console.log(form);
+  setSendError('');
 
   try {
-     console.log("EmailJS Env:", {
-  });
-  const response = await emailjs.send(
-  import.meta.env.VITE_EMAILJS_SERVICE_ID,
-  import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-  {
-    user_name: form.name,
-    user_email: form.email,
-    message: form.message,
-  },
-  import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-);
-    console.log("Success:", response);
+    await emailjs.send(
+      import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+      {
+        user_name: form.name,
+        user_email: form.email,
+        message: form.message,
+      },
+      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+    );
 
     setSent(true);
-    setForm({
-      name: "",
-      email: "",
-      message: "",
-    });
-
+    setForm({ name: '', email: '', message: '' });
   } catch (error) {
-    console.log("FULL ERROR:", error);
-    alert(error.text || error.message);
+    setSendError(
+      "Message couldn't be sent right now — please email me directly instead."
+    );
   }
 };
   return (
-    <section id="contact" className="relative py-24 grid-bg" style={{ paddingLeft: '6rem' }}>
+    <section id="contact" className="relative py-24 grid-bg pl-6 sm:pl-10 md:pl-24">
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -83,9 +76,9 @@ const handleSubmit = async (e) => {
           animate={inView ? { opacity: 1, x: 0 } : {}}
           className="mb-16"
         >
-          <p className="text-xs font-mono text-cyan-400/60 tracking-[0.3em] uppercase mb-2">06 / Contact</p>
+          <p className="text-xs font-mono text-cyan-400/60 tracking-[0.3em] uppercase mb-2">07 / Contact</p>
           <h2 className="section-heading text-3xl md:text-4xl text-white">
-            Let's Connect<span style={{ color: '#00f5ff' }}>_</span>
+            Let's Build Something Meaningful<span style={{ color: '#00f5ff' }}>_</span>
           </h2>
           <p className="text-slate-500 text-sm mt-4 max-w-lg">
             Open to full-time roles, internships, and interesting collaborations. Drop a message — I typically respond within 24 hours.
@@ -183,12 +176,25 @@ const handleSubmit = async (e) => {
               </motion.div>
             )}
 
+            {sendError && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="mb-5 p-4 rounded-lg text-center"
+                style={{ background: 'rgba(255,80,80,0.08)', border: '1px solid rgba(255,80,80,0.3)' }}
+              >
+                <p className="text-red-400 font-mono text-xs">{sendError}</p>
+              </motion.div>
+            )}
+
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Name */}
               <div className="relative">
                 <User size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-600" />
                 <input
                   type="text"
+                  id="contact-name"
+                  aria-label="Your Name"
                   placeholder="Your Name"
                   required
                   value={form.name}
@@ -208,6 +214,8 @@ const handleSubmit = async (e) => {
                 <AtSign size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-600" />
                 <input
                   type="email"
+                  id="contact-email"
+                  aria-label="Your Email"
                   placeholder="your@gmail.com"
                   required
                   value={form.email}
@@ -226,6 +234,8 @@ const handleSubmit = async (e) => {
               <div className="relative">
                 <MessageSquare size={14} className="absolute left-4 top-4 text-slate-600" />
                 <textarea
+                  id="contact-message"
+                  aria-label="Your Message"
                   placeholder="Your message..."
                   required
                   rows={5}
