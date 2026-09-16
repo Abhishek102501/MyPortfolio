@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Mail, Heart, Terminal, Code2 } from 'lucide-react';
+import { Github, Linkedin, Mail, Heart, Terminal, Code2, Instagram } from 'lucide-react';
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -42,6 +42,7 @@ export default function Footer() {
               { href: 'https://github.com/Abhishek102501', icon: Github, label: 'GitHub' },
               { href: 'https://linkedin.com/in/abhishek-dubey', icon: Linkedin, label: 'LinkedIn' },
               { href: 'https://leetcode.com/u/AbhishekDubey2003/', icon: Code2, label: 'LeetCode' },
+              { href: 'https://www.instagram.com/abhishek.dubey09/', icon: Instagram, label: 'Instagram' },
               { href: 'mailto:abhi.shek.897984@gmail.com', icon: Mail, label: 'Email' },
             ].map(({ href, icon: Icon, label }) => (
               <motion.a
