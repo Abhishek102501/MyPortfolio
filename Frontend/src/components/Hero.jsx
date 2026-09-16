@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Download, ChevronDown, Cpu, MapPin as MapPinIcon, Database, Github, Linkedin, Mail } from 'lucide-react';
+import { ArrowRight, Download, ChevronDown, Cpu, MapPin as MapPinIcon, Database, Github, Linkedin, Mail, Code2 } from 'lucide-react';
 
 const roles = [
   'Java Backend Developer',
@@ -280,6 +280,7 @@ export default function Hero() {
           {[
             { href: 'https://github.com/Abhishek102501', icon: Github, label: 'GitHub' },
             { href: 'https://linkedin.com/in/abhishek-dubey', icon: Linkedin, label: 'LinkedIn' },
+            { href: 'https://leetcode.com/u/AbhishekDubey2003/', icon: Code2, label: 'LeetCode' },
             { href: 'mailto:abhi.shek.897984@gmail.com', icon: Mail, label: 'Email' },
           ].map(({ href, icon: Icon, label }) => (
             <a

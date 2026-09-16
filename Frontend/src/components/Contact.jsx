@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Mail, Linkedin, Github, Send, MessageSquare, User, AtSign } from 'lucide-react';
+import { Mail, Linkedin, Github, Send, MessageSquare, User, AtSign, Code2 } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 
 const links = [
@@ -24,6 +24,13 @@ const links = [
     href: 'https://github.com/Abhishek102501',
     icon: Github,
     color: '#6e5494',
+  },
+  {
+    label: 'LeetCode',
+    value: 'https://leetcode.com/u/AbhishekDubey2003/',
+    href: 'https://leetcode.com/u/AbhishekDubey2003/',
+    icon: Code2,
+    color: '#FFA116',
   },
 ];
 
